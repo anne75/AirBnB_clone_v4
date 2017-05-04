@@ -1,6 +1,24 @@
 $(document).ready(function () {
+  let selected = [];
+  $('input[type=checkbox]').change(function () {
+    $(this).each(function () {
+      let name = $(this).attr('data-name');
+      if ($(this).is(':checked')) {
+        selected.push(name);
+	console.log(name);
+      } else {
+        selected.pop(name);
+      }
+      if (selected.length === 0) {
+        $('.amenities h4').text('\u00A0');
+      } else {
+        $('.amenities h4').text(selected.join(', '));
+      }
+    });
+  });
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/status/',
+    type: 'GET',
     dataType: 'json',
     success: function (res) {
       if (res.status === 'OK') {
@@ -10,6 +28,7 @@ $(document).ready(function () {
       }
     },
     error: function (res) {
-        $('DIV#api_status').removeClass('available');
+      $('DIV#api_status').removeClass('available');
     }
+  });
 });

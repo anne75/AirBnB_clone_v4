@@ -10,7 +10,7 @@ $(document).ready(function(){
    }
   });
   if (selected.length === 0) {
-    $('.amenities h4').text('\u00A0');
+    $('.amenities h4').text();
    } else {
     $('.amenities h4').text(selected.join(', '));
    }

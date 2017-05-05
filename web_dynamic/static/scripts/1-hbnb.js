@@ -1,6 +1,6 @@
 $(document).ready(function(){
  let selected = [];
- $('input[type=checkbox]').change(function () {
+ $('input[type=checkbox]').click(function () {
   $(this).each(function() {
     let name = $(this).attr('data-name');
     if ($(this).is(":checked")) {

@@ -102,8 +102,10 @@ function makePlaces (dict) {
     success: function (res) {
       console.log('results');
       console.log(res);
+      let count = 0;
       $.each(res, function (k, v) {
         let article = $('<article>');
+        count += 1;
         article.append($('<div>', {'class': 'price_by_night', 'text': '$' + v.price_by_night}));
         article.append($('<h2>').text(v.name));
         let info = $('<div>', {'class': 'informations'});
@@ -111,10 +113,24 @@ function makePlaces (dict) {
         info.append($('<div>', {'class': 'number_rooms', 'text': v.number_rooms + 'Rooms'}));
         info.append($('<div>', {'class': 'number_bathrooms', 'text': v.number_bathrooms + 'Bathrooms'}));
         article.append(info);
-        article.append($('<div>', {'class': 'user', 'html': '<b>Owner</b>: ' + v.user_id}));
+        writeOwner(v.user_id, count);
+        article.append($('<div>', {'class': 'user', 'id': count}));
         article.append($('<div>', {'class': 'description', 'html': v.description}));
         $('.places').append(article);
       });
+    }
+  });
+}
+
+
+function writeOwner(uid, count) {
+  $.ajax({
+    url: 'http://0.0.0.0:5001/api/v1/users/' + uid,
+    type: 'GET',
+    dataType: 'json',
+    success: function (data) {
+      let v = '#' + count + '.user';
+      $(v).html('<b>Owner</b>: ' + data.first_name + ' ' + data.last_name);
     }
   });
 }

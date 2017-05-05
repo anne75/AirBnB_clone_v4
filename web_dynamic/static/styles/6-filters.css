@@ -111,6 +111,8 @@ ul {
     display: block;
 }
 
-.amenities input[type=checkbox] {
+input[type=checkbox] {
     margin-right: 10px;
+    position: relative;
+    float: left;
 }

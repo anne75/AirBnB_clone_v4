@@ -57,6 +57,12 @@ h2, h3, h4 {
     font-weight: 400;
     font-size: 14px;
     line-height: 0%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
+}
+
 }
 
 ul {
@@ -85,6 +91,7 @@ ul {
 .popover.small-list {
     padding: 20px 0px  30px 40px;
     line-height: 30px;
+    list-style-type: none;
 }
 
 .popover h2 {
@@ -102,4 +109,8 @@ ul {
 
 .amenities:hover .popover {
     display: block;
+}
+
+.amenities input[type=checkbox] {
+    margin-right: 10px;
 }

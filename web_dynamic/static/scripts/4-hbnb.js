@@ -1,14 +1,16 @@
 $(document).ready(function () {
   let selected = [];
+  let am_id = [];
 // checkboxes amenity
   $('input[type=checkbox]').change(function () {
     $(this).each(function () {
       let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
         selected.push(name);
-        console.log(name);
+        am_id.push($(this).attr('data-id'));
       } else {
         selected.pop(name);
+        am_id.pop($(this).attr('data-id'));
       }
       if (selected.length === 0) {
         $('.amenities h4').text('\u00A0');
@@ -34,19 +36,32 @@ $(document).ready(function () {
     }
   });
 // build places
+  makePlaces({});
+//filter places by selected amenities
+  $('button').click(function () {
+      makePlaces({'amenities': am_id});
+  });
+
+});
+
+function makePlaces(dict) {
+  console.log("makePlaces arguments");
+  console.log(dict);
+  $('.places').empty();
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
     contentType: 'application/json',
     dataType: 'json',
-    data: JSON.stringify({}),
+    data: JSON.stringify(dict),
     error: function (res) {
       $('.places').append('<p>Server issue</p>');
       console.log(res);
     },
     success: function (res) {
+      console.log("results");
+      console.log(res);
       $.each(res, function (k, v) {
-        console.log(k);
         let article = $('<article>');
         article.append($('<div>', {'class': 'price_by_night', 'text': '$' + v.price_by_night}));
         article.append($('<h2>').text(v.name));
@@ -61,21 +76,4 @@ $(document).ready(function () {
       });
     }
   });
-});
-
-/**	    {% for place in places %}
-	        <article>
-	            <div class="price_by_night">${{place[1].price_by_night}}</div>
-	            <h2>{{place[1].name}}</h2>
-	            <div class="informations">
-	              <div class="max_guest">{{place[1].max_guest}} Guests</div>
-		      <div class="number_rooms">{{place[1].number_rooms}} Rooms</div>
-		      <div class="number_bathrooms">{{place[1].number_rooms}} Bathrooms</div>
-		    </div> <!-- end informations -->
-		    <div class="user"><b>Owner</b>: {{place[0]}}</div>
-		    {% autoescape false %}
-		    <div class="description">{{place[1].description}}</div>
-		    {% endautoescape %}
-		</article>
-	    {% endfor %}
-**/
+};

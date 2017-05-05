@@ -21,11 +21,11 @@
 	<div class="locations">
 	  <h3>States</h3>
 	  <h4>&nbsp;</h4>
-	  <ul class="popover">
+	  <ul class="popover states">
 	      {% for state in result|sort(attribute='name') %}
                  <LI><INPUT type="checkbox" data-id="{{ state.id }}" data-name="{{ state.name }}">
 		   <h2>{{ state.name }}</h2>
-                   <UL class="small_list">
+                   <UL class="small_list cities">
 		     {% for city in state.cities|sort(attribute='name') %}
                      <LI><INPUT type="checkbox" data-id="{{ city.id }}" data-name="{{ city.name }}">
 		       {{ city.name }}</LI>

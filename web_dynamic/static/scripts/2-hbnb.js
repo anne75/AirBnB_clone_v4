@@ -5,9 +5,8 @@ $(document).ready(function () {
       let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
         selected.push(name);
-	console.log(name);
       } else {
-        selected.pop(name);
+        selected = selected.filter(val => val !== name);
       }
       if (selected.length === 0) {
         $('.amenities h4').text('\u00A0');

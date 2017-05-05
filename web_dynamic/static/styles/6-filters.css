@@ -63,8 +63,6 @@ h2, h3, h4 {
     height: 100%;
 }
 
-}
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -86,6 +84,7 @@ ul {
     display: none;
     overflow: auto;
     max-height: 300px;
+    list-style-type: none;
 }
 
 .popover.small-list {
@@ -101,6 +100,7 @@ ul {
 .popover ul {
     padding: 0px 0px 10px 20px;
     line-height: 25px;
+    list-style-type: none;
 }
 
 .locations:hover .popover {

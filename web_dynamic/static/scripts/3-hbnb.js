@@ -6,9 +6,8 @@ $(document).ready(function () {
       let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
         selected.push(name);
-        console.log(name);
       } else {
-        selected.pop(name);
+        selected = selected.filter(val => val !== name);
       }
       if (selected.length === 0) {
         $('.amenities h4').text('\u00A0');
@@ -46,7 +45,6 @@ $(document).ready(function () {
     },
     success: function (res) {
       $.each(res, function (k, v) {
-        console.log(k);
         let article = $('<article>');
         article.append($('<div>', {'class': 'price_by_night', 'text': '$' + v.price_by_night}));
         article.append($('<h2>').text(v.name));
@@ -56,26 +54,9 @@ $(document).ready(function () {
         info.append($('<div>', {'class': 'number_bathrooms', 'text': v.number_bathrooms + 'Bathrooms'}));
         article.append(info);
         article.append($('<div>', {'class': 'user', 'html': '<b>Owner</b>: ' + v.user_id}));
-       	article.append($('<div>', {'class': 'description', 'html': v.description}));
+        article.append($('<div>', {'class': 'description', 'html': v.description}));
         $('.places').append(article);
       });
     }
   });
 });
-
-/**	    {% for place in places %}
-	        <article>
-	            <div class="price_by_night">${{place[1].price_by_night}}</div>
-	            <h2>{{place[1].name}}</h2>
-	            <div class="informations">
-	              <div class="max_guest">{{place[1].max_guest}} Guests</div>
-		      <div class="number_rooms">{{place[1].number_rooms}} Rooms</div>
-		      <div class="number_bathrooms">{{place[1].number_rooms}} Bathrooms</div>
-		    </div> <!-- end informations -->
-		    <div class="user"><b>Owner</b>: {{place[0]}}</div>
-		    {% autoescape false %}
-		    <div class="description">{{place[1].description}}</div>
-		    {% endautoescape %}
-		</article>
-	    {% endfor %}
-**/

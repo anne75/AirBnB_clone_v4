@@ -1,16 +1,16 @@
 $(document).ready(function () {
   let selected = [];
-  let am_id = [];
+  let amId = [];
 // checkboxes amenity
   $('input[type=checkbox]').change(function () {
     $(this).each(function () {
       let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
         selected.push(name);
-        am_id.push($(this).attr('data-id'));
+        amId.push($(this).attr('data-id'));
       } else {
-        selected.pop(name);
-        am_id.pop($(this).attr('data-id'));
+        selected = selected.filter(val => val !== name);
+        amId = amId.filter(val => val !== $(this).attr('data-id'));
       }
       if (selected.length === 0) {
         $('.amenities h4').text('\u00A0');
@@ -37,17 +37,17 @@ $(document).ready(function () {
   });
 // build places
   makePlaces({});
-//filter places by selected amenities
+// filter places by selected amenities
   $('button').click(function () {
-      makePlaces({'amenities': am_id});
+    makePlaces({'amenities': amId});
   });
-
 });
 
-function makePlaces(dict) {
-  console.log("makePlaces arguments");
+function makePlaces (dict) {
+  console.log('makePlaces arguments');
   console.log(dict);
   $('.places').empty();
+  $('.places').append('<h1>Places</h1>');
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/places_search/',
     type: 'POST',
@@ -59,8 +59,6 @@ function makePlaces(dict) {
       console.log(res);
     },
     success: function (res) {
-      console.log("results");
-      console.log(res);
       $.each(res, function (k, v) {
         let article = $('<article>');
         article.append($('<div>', {'class': 'price_by_night', 'text': '$' + v.price_by_night}));
@@ -71,9 +69,9 @@ function makePlaces(dict) {
         info.append($('<div>', {'class': 'number_bathrooms', 'text': v.number_bathrooms + 'Bathrooms'}));
         article.append(info);
         article.append($('<div>', {'class': 'user', 'html': '<b>Owner</b>: ' + v.user_id}));
-       	article.append($('<div>', {'class': 'description', 'html': v.description}));
+        article.append($('<div>', {'class': 'description', 'html': v.description}));
         $('.places').append(article);
       });
     }
   });
-};
+}

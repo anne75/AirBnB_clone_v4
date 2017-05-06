@@ -40,22 +40,15 @@ $(document).ready(function () {
     });
   });
  // checkboxes city
-  let ctSelected = [];
+ // let ctSelected = [];
   let cityId = [];
   $('.cities input[type=checkbox]').change(function () {
     $(this).each(function () {
       let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
-        ctSelected.push(name);
         cityId.push($(this).attr('data-id'));
       } else {
-        ctSelected = ctSelected.filter(val => val !== name);
         cityId = cityId.filter(val => val !== $(this).attr('data-id'));
-      }
-      if (ctSelected.length === 0) {
-        $('.locations h4').text('\u00A0');
-      } else {
-        $('.locations h4').text(ctSelected.join(', '));
       }
     });
   });

@@ -44,7 +44,6 @@ $(document).ready(function () {
   let cityId = [];
   $('.cities input[type=checkbox]').change(function () {
     $(this).each(function () {
-      let name = $(this).attr('data-name');
       if ($(this).is(':checked')) {
         cityId.push($(this).attr('data-id'));
       } else {
@@ -115,8 +114,7 @@ function makePlaces (dict) {
   });
 }
 
-
-function writeOwner(uid, count) {
+function writeOwner (uid, count) {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/users/' + uid,
     type: 'GET',

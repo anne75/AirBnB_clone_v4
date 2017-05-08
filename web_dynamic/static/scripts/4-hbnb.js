@@ -45,7 +45,6 @@ $(document).ready(function () {
 
 function makePlaces (dict) {
   console.log('makePlaces arguments');
-  console.log(dict);
   $('.places').empty();
   $('.places').append('<h1>Places</h1>');
   $.ajax({
@@ -80,7 +79,7 @@ function makePlaces (dict) {
   });
 }
 
-function writeOwner(uid, count) {
+function writeOwner (uid, count) {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/users/' + uid,
     type: 'GET',

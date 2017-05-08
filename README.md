@@ -4,6 +4,8 @@
 
 The purpose of this project is to recreate the AirBnB site, from the back-end data management to the front-end user interface. 
 
+<h4>Fourth phase</h4>
+In the fourth phase, the website was redesigned to make dynamic webpages using jQuery. Now as the user selects places in the browser using the checkboxes, the selected places are loaded on the client side.
 
 <h4>third phase</h4>
 Build an API. To implement, run the API module. Current implmentation requires an existing database in mysql. 

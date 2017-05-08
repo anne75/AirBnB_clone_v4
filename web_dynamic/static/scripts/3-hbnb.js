@@ -64,8 +64,7 @@ $(document).ready(function () {
   });
 });
 
-
-function writeOwner(uid, count) {
+function writeOwner (uid, count) {
   $.ajax({
     url: 'http://0.0.0.0:5001/api/v1/users/' + uid,
     type: 'GET',
